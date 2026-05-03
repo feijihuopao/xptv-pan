@@ -1,3 +1,13 @@
+// 补上XPTV本地源必须的入口函数 getLocalInfo
+async function getLocalInfo() {
+  const appConfig = {
+    ver: 1,
+    name: "木偶哥哥(本地)",
+    api: "csp_wogg_local",
+  }
+  return jsonify(appConfig)
+}
+
 const cheerio = createCheerio()
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
 
