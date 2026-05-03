@@ -45,7 +45,6 @@ async function getCards(ext) {
     headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36' }
   });
   const html = resp.data;
-  const cheerio = createCheerio();
   const $ = cheerio.load(html);
 
   const items = [];
@@ -113,14 +112,13 @@ async function getTracks(ext) {
     headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36' }
   });
   const html = resp.data;
-  const cheerio = createCheerio();
   const $ = cheerio.load(html);
 
   const tracks = [];
   $('.module-player-list .module-row-one').each((_, e) => {
     const name = $(e).find('.module-row-title h4').text().replace('- 公众号《多多影音》', '').trim();
-    const panShareUrl = $(e).find('.module-row-title p').text();
-    tracks.push({ name: name, pan: panShareUrl });
+    const pan = $(e).find('.module-row-title p').text();
+    tracks.push({ name, pan });
   });
 
   return jsonify({ list: [{ title: '默认', tracks }] });
@@ -142,7 +140,6 @@ async function search(ext) {
     headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36' }
   });
   const html = resp.data;
-  const cheerio = createCheerio();
   const $ = cheerio.load(html);
 
   const items = [];
